@@ -14,7 +14,7 @@ The generated PDF matches premium standards, split into four cleanly laid-out pa
 
 Here is an example of the generator's output using the standard **Lenna** test image:
 
-| Original Image | Numbered Template (Page 1) | Clean Outlines (Page 2) | Colorized Preview (Page 3) |
+| Original Image | Numbered Template | Clean Outlines | Colorized Preview |
 | :---: | :---: | :---: | :---: |
 | ![Original Lenna](tests/assets/lenna.png) | ![Numbered Template](tests/assets/lenna_numbered.png) | ![Clean Outlines](tests/assets/lenna_clean.png) | ![Colorized Preview](tests/assets/lenna_colorized.png) |
 
@@ -25,22 +25,55 @@ Here is an example of the generator's output using the standard **Lenna** test i
 
 ## Installation
 
-Create a virtual environment and install the package locally:
+Ensure you have **Python 3.10 or newer** installed. You can install `strokemap` using one of the methods below:
+
+### ⚡ Quick Start
+
+You can install `strokemap` directly from PyPI:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -e .
+pip install strokemap
 ```
 
-### Dependencies
-The package relies on the following standard python packages:
-- `numpy`
-- `pillow`
-- `opencv-python`
-- `scikit-learn`
-- `reportlab`
-- `scikit-image`
+Or install it from the local source directory:
+
+```bash
+pip install .
+```
+
+### 🛠️ Development Setup (Recommended)
+
+To set up a virtual environment and install dependencies for development:
+
+```bash
+# 1. Clone the repository (if not already done)
+git clone https://github.com/dipinknair/strokemap.git
+cd strokemap
+
+# 2. Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 3. Install the package in editable mode with development dependencies
+pip install -e ".[dev]"
+
+# 4. Install pre-commit hooks for linting
+pre-commit install
+```
+
+> [!TIP]
+> If you are using Windows, activate the virtual environment with:
+> `.venv\Scripts\activate`
+
+### 📦 Dependencies
+
+The installation automatically handles the following core dependencies:
+- **`numpy`**: Numerical array operations
+- **`pillow`**: Image loading and saving
+- **`opencv-python`**: Outline detection and distance transform
+- **`scikit-learn`**: K-Means clustering for color quantization
+- **`scikit-image`**: SLIC superpixel segmentation
+- **`reportlab`**: Premium multi-page PDF generation
 
 ---
 
@@ -96,8 +129,6 @@ generate_pdf(
 ---
 
 ## Authors
-
-- Developer
 
 For additional author and maintainer details, see [AUTHORS.md](AUTHORS.md).
 
