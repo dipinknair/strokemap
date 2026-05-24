@@ -2,7 +2,7 @@
 
 ## Primary Author
 
-- [Dipin Nair](https://github.com/dipinnair)
+- [Dipin Nair](https://github.com/dipinknair)
 
 ## Acknowledgements
 
