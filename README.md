@@ -1,11 +1,25 @@
-# Paint by Numbers Generator
+# Strokemap - Paint by Numbers Generator
 
 A Python package and CLI tool to convert any image into a high-quality, print-ready "Paint by Numbers" PDF template.
 
-The generated PDF matches premium standards, split into three cleanly laid-out pages:
+The generated PDF matches premium standards, split into four cleanly laid-out pages:
 1. **Page 1 - Numbered Template**: Light gray outlines with a small, centered index number in each region.
-2. **Page 2 - Clean Borders**: Thick black outlines without any numbers, perfect for clean canvas painting.
-3. **Page 3 - Color Palette Sheet**: A beautifully aligned grid of color swatches showing index numbers, hex codes, paint color blocks, and step-by-step instructions.
+2. **Page 2 - Clean Outlines**: Clean black outlines without any numbers, perfect for clean canvas painting.
+3. **Page 3 - Colorized Preview**: A color reference picture showing what the finished painting should look like.
+4. **Page 4 - Color Palette Sheet**: A beautifully aligned grid of color swatches showing index numbers, hex codes, paint color blocks, and step-by-step instructions.
+
+---
+
+## Preview
+
+Here is an example of the generator's output using the standard **Lenna** test image:
+
+| Original Image | Numbered Template (Page 1) | Clean Outlines (Page 2) | Colorized Preview (Page 3) |
+| :---: | :---: | :---: | :---: |
+| ![Original Lenna](tests/assets/lenna.png) | ![Numbered Template](tests/assets/lenna_numbered.png) | ![Clean Outlines](tests/assets/lenna_clean.png) | ![Colorized Preview](tests/assets/lenna_colorized.png) |
+
+> [!NOTE]
+> **Image Citation**: Lenna (or Lena) is a standard digital image processing test image, originally from the USC-SIPI Image Database. It is widely used for testing image processing algorithms.
 
 ---
 
@@ -26,6 +40,7 @@ The package relies on the following standard python packages:
 - `opencv-python`
 - `scikit-learn`
 - `reportlab`
+- `scikit-image`
 
 ---
 
@@ -72,7 +87,8 @@ generate_pdf(
 
 ## Algorithms Used
 
-1. **Color Quantization**: Performs K-Means clustering in the CIELAB color space. CIELAB Euclidean distance matches human color perception, resulting in a highly accurate color representation.
-2. **Detail Reduction & Region Merging**: To avoid micro-regions that are impossible to paint, the package runs connected components analysis and merges small regions into their dominant neighbor. The threshold is controlled by the chosen difficulty level.
-3. **Outline Extraction**: Computes a pixel-wise transition grid to produce clean, single-pixel borders.
-4. **Optimal Label Placement**: Uses a distance transform (`cv2.distanceTransform`) to find the center of the largest inscribed circle inside each region, placing the text at the most readable point.
+1. **Superpixel Segmentation (SLIC)**: Uses the Simple Linear Iterative Clustering (SLIC) algorithm to cluster pixels into contiguous, edge-conforming "superpixels". This ensures that the boundaries of regions natively stick to the actual physical boundaries and details in the image (such as eyes, text, and fine lines).
+2. **Color Quantization**: Performs K-Means clustering on the average colors of the superpixels in the CIELAB color space. Working in CIELAB space allows color distances to match human perception, resulting in a vibrant and accurate palette.
+3. **Detail Reduction & Region Merging**: Small, hard-to-paint micro-regions are intelligently merged into their dominant neighbor using connected components analysis, with thresholds dynamically adjusted by the selected difficulty level.
+4. **Outline Extraction**: Computes a pixel-wise transition grid to produce clean, single-pixel outlines.
+5. **Optimal Label Placement**: Uses a distance transform (`cv2.distanceTransform`) to find the center of the largest inscribed circle within each region, placing number labels at the most readable point.
