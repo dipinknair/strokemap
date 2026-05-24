@@ -92,3 +92,23 @@ generate_pdf(
 3. **Detail Reduction & Region Merging**: Small, hard-to-paint micro-regions are intelligently merged into their dominant neighbor using connected components analysis, with thresholds dynamically adjusted by the selected difficulty level.
 4. **Outline Extraction**: Computes a pixel-wise transition grid to produce clean, single-pixel outlines.
 5. **Optimal Label Placement**: Uses a distance transform (`cv2.distanceTransform`) to find the center of the largest inscribed circle within each region, placing number labels at the most readable point.
+
+---
+
+## Authors
+
+- Developer
+
+For additional author and maintainer details, see [AUTHORS.md](AUTHORS.md).
+
+## Contributors
+
+This project is maintained by the community. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the current list of contributors and how to get involved.
+
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
+
+## Security
+
+If you discover a vulnerability, please do not publish it publicly. Refer to [SECURITY.md](SECURITY.md) for our security reporting policy.
