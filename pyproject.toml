@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "strokemap"
+version = "0.1.0"
+description = "Convert any image into a Paint by Numbers printable PDF"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Developer" }
+]
+dependencies = [
+    "numpy",
+    "pillow",
+    "opencv-python",
+    "scikit-learn",
+    "reportlab",
+    "scikit-image",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "pre-commit",
+    "ruff",
+]
+
+[project.scripts]
+strokemap = "strokemap.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["strokemap*"]
+
+# ---------------------------------------------------------------------------
+# Ruff – linter + formatter
+# ---------------------------------------------------------------------------
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long – handled by formatter
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["strokemap"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ---------------------------------------------------------------------------
+# Pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"

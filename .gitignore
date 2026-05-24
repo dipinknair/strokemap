@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+wheels/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
+MANIFEST
+*.tar.gz
+*.whl
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Ruff
+.ruff_cache/
+
+# Pre-commit
+.pre-commit-run/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE / editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project output files
+*.pdf
+*.png
+*.jpg
+*.jpeg
+# Keep sample assets
+!tests/assets/
+!tests/assets/*
